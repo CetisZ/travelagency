@@ -1,6 +1,6 @@
 //Authors: David McDonald, Farid Kassam, Shefqet Zyko, Irshaad Sardiwalla, Srinivasan Sivalingam
 // Grp1 Team 2
-// Date: 19 Mar 2021
+// Date: 25 April 2021
 
 var createError = require('http-errors');
 var express = require('express');
@@ -13,7 +13,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 connection to mongoose is required once only. We chose to place it in app.js
 */
 const mongoose = require('mongoose');
-mongoose.connect(process.env.DB_HOST, {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(process.env.DB_HOST, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 
@@ -43,7 +43,7 @@ app.use(cookieParser());
 // https://www.npmjs.com/package/express-mongo-sanitize
 // Or, to replace prohibited characters with _, use:
 app.use(mongoSanitize({
-  replaceWith: '_'
+    replaceWith: '_'
 }));
 
 // For Passport.js
@@ -76,27 +76,27 @@ app.use('/', indexRouter);
 app.use('/register', usersRouter);
 app.use('/blogs', blogRouter);
 app.use('/packages', packageRouter)
-//app.use("/conapp.use('/ordersSum', orderSumRouter); //newtacts", contactRouter);
+    //app.use("/conapp.use('/ordersSum', orderSumRouter); //newtacts", contactRouter);
 app.use('/book', orderRouter);
 app.use('/contacts', contactRouter);
 app.use('/viewbookings', orderSumRouter); //new
 
 
- 
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  next(createError(404));
+    next(createError(404));
 });
 
 // error handler
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+    // render the error page
+    res.status(err.status || 500);
+    res.render('error');
 });
 
 module.exports = app;
